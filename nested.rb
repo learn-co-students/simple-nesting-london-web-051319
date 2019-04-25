@@ -1,4 +1,4 @@
-
+require 'pry'
 def hopper
 	programmer_hash = 
  		{
@@ -16,6 +16,9 @@ def hopper
         }
      }
 
+    #  grace = programmer_hash.select{|programmer| programmer == :grace_hopper}
+     programmer_hash.fetch(:grace_hopper) # returns the nested hashes
+    #  programmer_hash.delete(:dennis_ritchie)
 
 end
 
@@ -37,6 +40,7 @@ def alan_kay_is_known_for
           :languages => ["C"]
         }
      }
+     programmer_hash.fetch(:alan_kay).fetch(:known_for) # allows you to move inside another level of the nested hash to return a specific value
 end
 
 def dennis_ritchies_language
@@ -55,6 +59,8 @@ def dennis_ritchies_language
           :languages => ["C"]
         }
      }
+     array = programmer_hash.fetch(:dennis_ritchie).fetch(:languages)
+     array[0] # code didn't like simply returning a string from the above so defined an array to then draw the value from.
 end
 
 def adding_matz
@@ -79,8 +85,8 @@ def adding_matz
           :languages => ["C"]
         }
      }
-
-    
+programmer_hash[:yukihiro_matsumoto] = {:known_for => "Ruby", :languages => ["LISP", "C"]}
+programmer_hash # just needed to return the hash after adding values
 end
 
 def changing_alan
@@ -101,8 +107,17 @@ def changing_alan
      }
      #change what Alan Kay is :known_for to the value of the alans_new_info variable. 
      alans_new_info = "GUI"
-     
-     
+ 
+    # a_k_f = [programmer_hash[:alan_kay][:known_for]]
+    # a_k_f.unshift(alans_new_info)
+    #this would create an array of the values and add in the required element.
+    programmer_hash[:alan_kay][:known_for] = alans_new_info
+    # programmer_hash[:alan_kay][:known_for] << alans_new_info 
+    # this would add a string to the existing string. Need to include (, ) if required in return value
+ 
+     programmer_hash
+
+    # binding.pry
 end
 
 def adding_to_dennis
@@ -122,4 +137,6 @@ def adding_to_dennis
         }
      }
 
+programmer_hash[:dennis_ritchie][:languages] << "Assembly"
+programmer_hash
 end
